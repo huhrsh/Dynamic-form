@@ -1,15 +1,13 @@
 <div class="form-parent">
 
-    <div  class="absolute w-1/2 h-full bg-amber-200 transition-all duration-1000 z-20 p-6 flex items-center justify-center top-0 {{!signUp?'left-0 rounded-tl-3xl rounded-bl-3xl':'left-[50%] rounded-tr-3xl rounded-br-3xl'}} ">
-        <div *ngIf="signUp; then signInBlock else signUpBlock">
-        </div>
-        <ng-template #signInBlock>
-            <p class="text-para" (click)="changeSignUpStatus()">Already have an account?<br/> Click here to Sign In!</p>
-        </ng-template>
-        <ng-template #signUpBlock>
-            <p class="text-para" (click)="changeSignUpStatus()">Don't have an account?<br/> Click here to Sign Up!</p>
-        </ng-template>
-    </div>
+    <div class="absolute w-1/2 bg-amber-100 h-full transition-all duration-1000 z-20 px-6 flex flex-col items-center justify-center top-0"
+    [ngClass]="{'left-0 rounded-tl-3xl rounded-bl-3xl': !signUp, 'left-[50%] rounded-tr-3xl rounded-br-3xl': signUp}">
+    
+   <!-- <img class="w-9/12 transition-all duration-200" [src]="!signUp ? '../../../assets/Lost-rafiki.png' : '../../../assets/Profile data-rafiki.png'" /> -->
+   <p class="text-para" (click)="changeSignUpStatus()">
+       {{ !signUp ? "Don't have an account? Click here to Sign Up!" : "Already have an account? Click here to Sign In!" }}
+   </p>
+</div>
 
 
     <form (ngSubmit)="handleSignUp()" class="sign-up-form">

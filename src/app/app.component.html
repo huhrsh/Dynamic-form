@@ -11,7 +11,7 @@
 
     </ng-template>
   </nav>
-  <div *ngIf="!user; else userElseBlock" class="px-40 py-20">
+  <div *ngIf="!user; else userElseBlock" class="px-44 py-20">
     <app-form-component (submitSignUp)="addNewUser($event)" (submitSignIn)="loginUser($event)" ></app-form-component>
   </div>
   <ng-template #userElseBlock>
