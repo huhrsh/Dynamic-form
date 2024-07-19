@@ -1,0 +1,83 @@
+<div class="form-parent">
+
+    <div  class="absolute w-1/2 h-full bg-amber-200 transition-all duration-1000 z-20 p-6 flex items-center justify-center top-0 {{!signUp?'left-0 rounded-tl-3xl rounded-bl-3xl':'left-[50%] rounded-tr-3xl rounded-br-3xl'}} ">
+        <div *ngIf="signUp; then signInBlock else signUpBlock">
+        </div>
+        <ng-template #signInBlock>
+            <p class="text-para" (click)="changeSignUpStatus()">Already have an account?<br/> Click here to Sign In!</p>
+        </ng-template>
+        <ng-template #signUpBlock>
+            <p class="text-para" (click)="changeSignUpStatus()">Don't have an account?<br/> Click here to Sign Up!</p>
+        </ng-template>
+    </div>
+
+
+    <form (ngSubmit)="handleSignUp()" class="sign-up-form">
+        <h3>Sign Up</h3>
+        <div>
+            <h4>Name: </h4>
+            <input [(ngModel)]="signUp_name" name="name" type="text" required placeholder="John Doe" />
+        </div>
+        <div>
+            <h4>Email: </h4>
+            <input [(ngModel)]="signUp_email" name="email" type="email" required placeholder="johndoe@gmail.com" />
+        </div>
+        <div>
+            <h4>Username: </h4>
+            <input [(ngModel)]="signUp_username" name="username" type="text" required placeholder="johnDoe" />
+        </div>
+        <div>
+            <h4>Password: </h4>
+            <input minlength="8" [(ngModel)]="signUp_password" name="password" [type]="signUp_hidePassword?'password':'text'" required />
+            <div *ngIf="signUp_hidePassword; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+                <img (click)="changeSignUpPasswordType()" src="https://cdn-icons-png.flaticon.com/128/8395/8395594.png" alt="eye open" />
+            </ng-template>
+            <ng-template #elseBlock>
+                <img (click)="changeSignUpPasswordType()" src="https://cdn-icons-png.flaticon.com/128/6423/6423885.png" alt="eye closed" />
+            </ng-template>
+        </div>
+        <button>Sign Up</button>
+    </form>
+
+    <form (ngSubmit)="handleSignIn()" class="sign-in-form">
+        <h3>Sign In</h3>
+        <div>
+            <h4>Sign in via: </h4>
+            <div>
+                <input id="email" [(ngModel)]="signIn_useEmail" name="useEmail" type="radio" [value]="true" required placeholder="Email" />
+                <label for="email" class="text-lg" >Email</label> 
+            </div>
+            <div>
+                <input id="username" [(ngModel)]="signIn_useEmail" name="useUsername" type="radio" [value]="false" required placeholder="Username" />
+                <label for="username" class="text-lg" >Username</label> 
+            </div>
+        </div>
+        <div *ngIf="signIn_useEmail; then emailBlock else usernameBlock"></div>
+        <ng-template #emailBlock>
+            <div>
+                <h4>Email: </h4>
+                <input [(ngModel)]="signIn_email" name="email" type="email" required placeholder="johndoe@gmail.com" />
+            </div>
+        </ng-template>
+        <ng-template #usernameBlock>
+            <div>
+                <h4>Username: </h4>
+                <input [(ngModel)]="signIn_username" name="username" type="text" required placeholder="johnDoe" />
+            </div>
+        </ng-template>
+        <div>
+            <h4>Password: </h4>
+            <input [(ngModel)]="signIn_password" name="password" [type]="signIn_hidePassword?'password':'text'" required />
+            <div *ngIf="signIn_hidePassword; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+                <img (click)="changeSignInPasswordType()" src="https://cdn-icons-png.flaticon.com/128/8395/8395594.png" alt="eye open" />
+            </ng-template>
+            <ng-template #elseBlock>
+                <img (click)="changeSignInPasswordType()" src="https://cdn-icons-png.flaticon.com/128/6423/6423885.png" alt="eye closed" />
+            </ng-template>
+        </div>
+        <button>Sign In</button>
+    </form>
+</div>
+
